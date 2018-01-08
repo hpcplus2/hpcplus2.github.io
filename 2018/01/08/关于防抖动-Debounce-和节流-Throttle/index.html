@@ -91,7 +91,7 @@
 <meta property="og:site_name" content="Twenty One">
 <meta property="og:description" content="了解背景某项目中，需要实现一个及时搜索框，当用户输入关键字即去搜索相关数据。项目框架为React，使用onChange来监听input的输入事件。初步完成之后发现了问题，用户输入一个中文，会多次调用change事件，因每一次拼音的输入都会触发change事件。随即我决定采用延迟调用的方式去处理，沿着这个思路，发现了throttle-debounce，同时对debounce有了初步了解。 什么是De">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-08T16:40:39.000Z">
+<meta property="og:updated_time" content="2018-01-08T16:44:41.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于防抖动(Debounce)和节流(Throttle)">
 <meta name="twitter:description" content="了解背景某项目中，需要实现一个及时搜索框，当用户输入关键字即去搜索相关数据。项目框架为React，使用onChange来监听input的输入事件。初步完成之后发现了问题，用户输入一个中文，会多次调用change事件，因每一次拼音的输入都会触发change事件。随即我决定采用延迟调用的方式去处理，沿着这个思路，发现了throttle-debounce，同时对debounce有了初步了解。 什么是De">
@@ -348,8 +348,8 @@
       
 
       
-        <h2 id="了解背景"><a href="#了解背景" class="headerlink" title="了解背景"></a>了解背景</h2><p>某项目中，需要实现一个及时搜索框，当用户输入关键字即去搜索相关数据。项目框架为React，使用onChange来监听input的输入事件。<br>初步完成之后发现了问题，用户输入一个中文，会多次调用change事件，因每一次拼音的输入都会触发change事件。<br>随即我决定采用延迟调用的方式去处理，沿着这个思路，发现了<a href="https://github.com/niksy/throttle-debounce" target="_blank" rel="noopener">throttle-debounce</a>，同时对debounce有了初步了解。</p>
-<h2 id="什么是Debounce"><a href="#什么是Debounce" class="headerlink" title="什么是Debounce"></a>什么是Debounce</h2><p>百度百科：按键去抖动，机械按键在按下时，并非按下就接触的很好，尤其是有弹簧片的机械开关，会在接触的瞬间反复开合多次。<br>为了消除这种情况，会在断开闭合后执行一个延时程序，5ms～10ms的延时，让前沿抖动消失后再一次检测键的状态，如果仍保持相同状态电平，则确认为真正有键按下。</p>
+        <h2 id="了解背景"><a href="#了解背景" class="headerlink" title="了解背景"></a>了解背景</h2><p>某项目中，需要实现一个及时搜索框，当用户输入关键字即去搜索相关数据。项目框架为React，使用onChange来监听input的输入事件。初步完成之后发现了问题，用户输入一个中文，会多次调用change事件，因每一次拼音的输入都会触发change事件。随即我决定采用延迟调用的方式去处理，沿着这个思路，发现了<a href="https://github.com/niksy/throttle-debounce" target="_blank" rel="noopener">throttle-debounce</a>，同时对debounce有了初步了解。</p>
+<h2 id="什么是Debounce"><a href="#什么是Debounce" class="headerlink" title="什么是Debounce"></a>什么是Debounce</h2><p>百度百科：按键去抖动，机械按键在按下时，并非按下就接触的很好，尤其是有弹簧片的机械开关，会在接触的瞬间反复开合多次。为了消除这种情况，会在断开闭合后执行一个延时程序，5ms～10ms的延时，让前沿抖动消失后再一次检测键的状态，如果仍保持相同状态电平，则确认为真正有键按下。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Creates a debounced function that delays invoking `func` until after `wait`</span><br><span class="line">milliseconds have elapsed since the last time the debounced function was</span><br><span class="line">invoked, or until the next browser frame is drawn.</span><br></pre></td></tr></table></figure>
 <p>以上来源于: <a href="https://github.com/lodash/lodash/blob/master/debounce.js" target="_blank" rel="noopener">lodash/debounce.js</a></p>
 <p>个人理解：当函数调用后，指定时间内没有再次被调用，则执行。若在指定时间内再次调用，则重新计算时间。</p>
