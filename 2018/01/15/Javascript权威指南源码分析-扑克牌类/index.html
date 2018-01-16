@@ -72,7 +72,7 @@
 
 
 
-  <meta name="keywords" content="Javascript," />
+  <meta name="keywords" content="Javascript,Javascript权威指南," />
 
 
 
@@ -83,18 +83,18 @@
 
 
 
-<meta name="description" content="了解背景某项目中，需要实现一个及时搜索框，当用户输入关键字即去搜索相关数据。项目框架为React，使用onChange来监听input的输入事件。初步完成之后发现了问题，用户输入一个中文，会多次调用change事件，因每一次拼音的输入都会触发change事件。随即我决定采用延迟调用的方式去处理，沿着这个思路，发现了throttle-debounce，同时对debounce有了初步了解。 什么是De">
-<meta name="keywords" content="Javascript">
+<meta name="description" content="前言 书本介绍: 《Javascript权威指南 第六版》 章节：第9章 类和模块 代码案例: [9.7, 9.8]  在阅读该章节的时候，对原型原理以及衍生知识点一直似懂非懂。通过对示例代码的分析与总结，让我对类的基础知识有更形象的理解。想着记录下来供我后续阅览，于是有了这篇文章。 源代码以下代码来源书本内容，由于自己重新敲了一遍，有些地方会不一致，但是不影响最终展示。 enumeration类">
+<meta name="keywords" content="Javascript,Javascript权威指南">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于防抖动(Debounce)和节流(Throttle)">
-<meta property="og:url" content="http://yoursite.com/2018/01/08/关于防抖动-Debounce-和节流-Throttle/index.html">
+<meta property="og:title" content="Javascript权威指南源码分析-扑克牌类">
+<meta property="og:url" content="http://yoursite.com/2018/01/15/Javascript权威指南源码分析-扑克牌类/index.html">
 <meta property="og:site_name" content="Twenty One">
-<meta property="og:description" content="了解背景某项目中，需要实现一个及时搜索框，当用户输入关键字即去搜索相关数据。项目框架为React，使用onChange来监听input的输入事件。初步完成之后发现了问题，用户输入一个中文，会多次调用change事件，因每一次拼音的输入都会触发change事件。随即我决定采用延迟调用的方式去处理，沿着这个思路，发现了throttle-debounce，同时对debounce有了初步了解。 什么是De">
+<meta property="og:description" content="前言 书本介绍: 《Javascript权威指南 第六版》 章节：第9章 类和模块 代码案例: [9.7, 9.8]  在阅读该章节的时候，对原型原理以及衍生知识点一直似懂非懂。通过对示例代码的分析与总结，让我对类的基础知识有更形象的理解。想着记录下来供我后续阅览，于是有了这篇文章。 源代码以下代码来源书本内容，由于自己重新敲了一遍，有些地方会不一致，但是不影响最终展示。 enumeration类">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-08T16:51:08.000Z">
+<meta property="og:updated_time" content="2018-01-16T16:44:27.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于防抖动(Debounce)和节流(Throttle)">
-<meta name="twitter:description" content="了解背景某项目中，需要实现一个及时搜索框，当用户输入关键字即去搜索相关数据。项目框架为React，使用onChange来监听input的输入事件。初步完成之后发现了问题，用户输入一个中文，会多次调用change事件，因每一次拼音的输入都会触发change事件。随即我决定采用延迟调用的方式去处理，沿着这个思路，发现了throttle-debounce，同时对debounce有了初步了解。 什么是De">
+<meta name="twitter:title" content="Javascript权威指南源码分析-扑克牌类">
+<meta name="twitter:description" content="前言 书本介绍: 《Javascript权威指南 第六版》 章节：第9章 类和模块 代码案例: [9.7, 9.8]  在阅读该章节的时候，对原型原理以及衍生知识点一直似懂非懂。通过对示例代码的分析与总结，让我对类的基础知识有更形象的理解。想着记录下来供我后续阅览，于是有了这篇文章。 源代码以下代码来源书本内容，由于自己重新敲了一遍，有些地方会不一致，但是不影响最终展示。 enumeration类">
 
 
 
@@ -124,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/01/08/关于防抖动-Debounce-和节流-Throttle/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/01/15/Javascript权威指南源码分析-扑克牌类/"/>
 
 
 
 
 
-  <title>关于防抖动(Debounce)和节流(Throttle) | Twenty One</title>
+  <title>Javascript权威指南源码分析-扑克牌类 | Twenty One</title>
   
 
 
@@ -281,7 +281,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/08/关于防抖动-Debounce-和节流-Throttle/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/15/Javascript权威指南源码分析-扑克牌类/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="hpcherry">
@@ -298,7 +298,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">关于防抖动(Debounce)和节流(Throttle)</h1>
+          <h1 class="post-title" itemprop="name headline">Javascript权威指南源码分析-扑克牌类</h1>
         
 
         <div class="post-meta">
@@ -310,8 +310,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-08T23:06:26+08:00">
-                2018-01-08
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-15T23:33:46+08:00">
+                2018-01-15
               </time>
             
 
@@ -370,21 +370,19 @@
       
 
       
-        <h2 id="了解背景"><a href="#了解背景" class="headerlink" title="了解背景"></a>了解背景</h2><p>某项目中，需要实现一个及时搜索框，当用户输入关键字即去搜索相关数据。项目框架为React，使用onChange来监听input的输入事件。初步完成之后发现了问题，用户输入一个中文，会多次调用change事件，因每一次拼音的输入都会触发change事件。随即我决定采用延迟调用的方式去处理，沿着这个思路，发现了<a href="https://github.com/niksy/throttle-debounce" target="_blank" rel="noopener">throttle-debounce</a>，同时对debounce有了初步了解。</p>
-<h2 id="什么是Debounce"><a href="#什么是Debounce" class="headerlink" title="什么是Debounce"></a>什么是Debounce</h2><p>百度百科：按键去抖动，机械按键在按下时，并非按下就接触的很好，尤其是有弹簧片的机械开关，会在接触的瞬间反复开合多次。为了消除这种情况，会在断开闭合后执行一个延时程序，5ms～10ms的延时，让前沿抖动消失后再一次检测键的状态，如果仍保持相同状态电平，则确认为真正有键按下。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Creates a debounced function that delays invoking `func` until after `wait`</span><br><span class="line">milliseconds have elapsed since the last time the debounced function was</span><br><span class="line">invoked, or until the next browser frame is drawn.</span><br></pre></td></tr></table></figure>
-<p>以上来源于: <a href="https://github.com/lodash/lodash/blob/master/debounce.js" target="_blank" rel="noopener">lodash/debounce.js</a></p>
-<p>个人理解：当函数调用后，指定时间内没有再次被调用，则执行。若在指定时间内再次调用，则重新计算时间。</p>
-<p>在某些情况下，由于事件被频繁调用(例如：mousemove, keyup)，会造成很多重复性的动作，这些动作可能会造成占用内存，重复调用等资源浪费行为。</p>
-<p>这个时候，debounce的作用就是限制这些事件以一定的频率调用，例如限制搜索框的change事件500ms调用一次，这样我们可以避免多次的服务器请求。</p>
-<h2 id="什么是Throttle"><a href="#什么是Throttle" class="headerlink" title="什么是Throttle"></a>什么是Throttle</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Creates a throttled function that only invokes `func` at most once per </span><br><span class="line">every `wait` milliseconds (or once per browser frame).</span><br></pre></td></tr></table></figure>
-<p>以上来源于: <a href="https://github.com/lodash/lodash/blob/master/throttle.js" target="_blank" rel="noopener">lodash/throttle.js</a></p>
-<p>个人理解： 函数在预定义的执行周期内，最多执行一次</p>
-<p>例如onscroll事件，在一个无限滚动的内容区域内，我们必须检测滚动条距离底部的位置，如果使用debounce则会造成用户滚动底部停止动作了才去请求数据的情况。</p>
-<p>而使用throttle则可以保障我们不断的去检查滚动条的位置，及时获取数据。</p>
-<h2 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h2><p>debounce和throttle的轮子已经非常多了，没有必要自己去实现一套。这里推荐一种方式，使用Lodash的自定义库，生成的代码仅2kb。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install -g lodash-cli</span><br><span class="line">lodash include=debounce,throttle</span><br></pre></td></tr></table></figure>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>debounce和throttle都可以帮助我们延时执行函数，但是具体该用哪一个就需要按照自己的实际需求去选择了。</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>书本介绍: 《Javascript权威指南 第六版》</p>
+<p>章节：第9章 类和模块</p>
+<p>代码案例: [9.7, 9.8]</p>
+</blockquote>
+<p>在阅读该章节的时候，对原型原理以及衍生知识点一直似懂非懂。通过对示例代码的分析与总结，让我对类的基础知识有更形象的理解。想着记录下来供我后续阅览，于是有了这篇文章。</p>
+<h2 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h2><p>以下代码来源书本内容，由于自己重新敲了一遍，有些地方会不一致，但是不影响最终展示。</p>
+<h3 id="enumeration类"><a href="#enumeration类" class="headerlink" title="enumeration类"></a>enumeration类</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">/* </span><br><span class="line">  enumeration函数创建了一个新的枚举类，实参对象表示类的每个实例的名字和值</span><br><span class="line">  返回值是一个构造函数，他标示这个新类</span><br><span class="line">*/</span><br><span class="line">function enumeration(namesToValues) &#123;</span><br><span class="line">  // enumeration不能作为构造函数</span><br><span class="line">  const enumeration = function() &#123;</span><br><span class="line">    throw &quot;Can&apos;t Instantiate Enumerations&quot;;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  const proto = enumeration.prototype = &#123;</span><br><span class="line">    toString: function() &#123; return this.name; &#125;,</span><br><span class="line">    valueOf: function() &#123; return this.value; &#125;,</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  enumeration.values = []; // 用于存放枚举对象数组</span><br><span class="line">  for (let name in namesToValues) &#123;</span><br><span class="line">    // for in 会遍历对象的原型链上的所有属性，推荐使用hasOwnProperty过滤</span><br><span class="line">    if (!Object.hasOwnProperty.call(namesToValues, name)) &#123;</span><br><span class="line">      continue;</span><br><span class="line">    &#125;</span><br><span class="line">    const e = inherit(proto);</span><br><span class="line">    e.name = name; // 设置对象name</span><br><span class="line">    e.value = namesToValues[name]; // 设置对象的值</span><br><span class="line">    enumeration[name] = e; // 将对象设置为构造函数的属性</span><br><span class="line">    enumeration.values.push(e);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  // 添加遍历方法</span><br><span class="line">  enumeration.foreach = function(f, c) &#123;</span><br><span class="line">    for (let i = 0; i &lt; this.values.length; i++) &#123;</span><br><span class="line">      f.call(c, this.values[i]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  return enumeration;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 继承函数</span><br><span class="line">function inherit(p) &#123;</span><br><span class="line">  if (p === null) throw TypeError();</span><br><span class="line">  if (Object.create) &#123;</span><br><span class="line">    return Object.create(p);</span><br><span class="line">  &#125;</span><br><span class="line">  const t = typeof p;</span><br><span class="line">  if (t !== &quot;object&quot; &amp;&amp; t !== &quot;function&quot;) &#123;</span><br><span class="line">    throw TypeError();</span><br><span class="line">  &#125;</span><br><span class="line">  function F() &#123;&#125;</span><br><span class="line">  F.prototype = p;</span><br><span class="line">  return new F();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="poker类"><a href="#poker类" class="headerlink" title="poker类"></a>poker类</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">function Poker(suit, rank) &#123;</span><br><span class="line">  this.suit = suit;</span><br><span class="line">  this.rank = rank;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 花色</span><br><span class="line">Poker.Suit = Enumeration(&#123;</span><br><span class="line">  Clubs: 1,</span><br><span class="line">  Diamonds: 2,</span><br><span class="line">  Hearts: 3,</span><br><span class="line">  Spades: 4</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">// 牌值</span><br><span class="line">Poker.Rank = Enumeration(&#123;</span><br><span class="line">  Two: 2,</span><br><span class="line">  Three: 3,</span><br><span class="line">  Four: 4,</span><br><span class="line">  Five: 5,</span><br><span class="line">  Six: 6,</span><br><span class="line">  Seven: 7,</span><br><span class="line">  Eight: 8,</span><br><span class="line">  Nine: 9,</span><br><span class="line">  Ten: 10,</span><br><span class="line">  Jack: 11,</span><br><span class="line">  Queen: 12,</span><br><span class="line">  King: 13,</span><br><span class="line">  Ace: 14,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">Poker.prototype.toString = function() &#123;</span><br><span class="line">  return `$&#123;this.rank.toString()&#125; of $&#123;this.suit.toString()&#125;`;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 比较牌值大小</span><br><span class="line">Poker.prototype.compareTo = function(that) &#123;</span><br><span class="line">  if (this.rank &lt; that.rank) return -1;</span><br><span class="line">  if (this.rank &gt; that.rank) return 1;</span><br><span class="line">  return 0;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 根据牌值计算的排序函数</span><br><span class="line">Poker.orderByRank = function(a, b) &#123;</span><br><span class="line">  return a.compareTo(b);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 结合花色和牌值计算的排序函数</span><br><span class="line">Poker.orderBySuit = function(a, b) &#123;</span><br><span class="line">  if (a.suit &lt; b.suit) return -1;</span><br><span class="line">  if (a.suit &gt; b.suit) return 1;</span><br><span class="line">  return Poker.orderByRank(a, b);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="deck类"><a href="#deck类" class="headerlink" title="deck类"></a>deck类</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">function Deck() &#123;</span><br><span class="line">  // 初始化所有的牌</span><br><span class="line">  const cards = this.cards = [];</span><br><span class="line">  Poker.Suit.foreach(function(s) &#123;</span><br><span class="line">    Poker.Rank.foreach(function(r) &#123;</span><br><span class="line">      cards.push(new Poker(s, r));</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 洗牌: 重新洗牌并返回洗好的牌</span><br><span class="line">Deck.prototype.shuffle = function() &#123;</span><br><span class="line">  const deck = this.cards, len = deck.length;</span><br><span class="line">  for (let i = len - 1; i &gt; 0; i--) &#123;</span><br><span class="line">    let r = Math.floor(Math.random() * (i + 1));</span><br><span class="line">    let temp;</span><br><span class="line">    temp = deck[i];</span><br><span class="line">    deck[i] = deck[r];</span><br><span class="line">    deck[r] = temp;</span><br><span class="line">  &#125;</span><br><span class="line">  return this;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 发牌</span><br><span class="line">Deck.prototype.deal = function(n) &#123;</span><br><span class="line">  if (this.cards.length &lt; n) &#123;</span><br><span class="line">    throw &quot;Out of cards&quot;;</span><br><span class="line">  &#125;</span><br><span class="line">  return this.cards.splice(this.cards.length - n, n);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Deck.prototype.getValues = function() &#123;</span><br><span class="line">  return this.cards;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="测试代码"><a href="#测试代码" class="headerlink" title="测试代码"></a>测试代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">const deck = (new Deck()).shuffle();</span><br><span class="line">const hand = deck.deal(13).sort(Poker.orderBySuit);</span><br><span class="line"></span><br><span class="line">// 查看全部牌</span><br><span class="line">console.log(&apos;===== Deck Pockers =====&apos;);</span><br><span class="line">deck.getValues().sort(Poker.orderBySuit).forEach(function(card) &#123;</span><br><span class="line">  console.log(card.toString());</span><br><span class="line">&#125;);</span><br><span class="line">console.log(&apos;========================\n&apos;);</span><br><span class="line"></span><br><span class="line">// 查看手牌</span><br><span class="line">console.log(&apos;===== Hand Pockers =====&apos;);</span><br><span class="line">hand.forEach(function(card) &#123;</span><br><span class="line">  console.log(card.toString());</span><br><span class="line">&#125;);</span><br><span class="line">console.log(&apos;========================&apos;);</span><br></pre></td></tr></table></figure>
+<h3 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">===== Deck Pockers =====</span><br><span class="line">Two of Clubs</span><br><span class="line">Four of Clubs</span><br><span class="line">Five of Clubs</span><br><span class="line">Six of Clubs</span><br><span class="line">Seven of Clubs</span><br><span class="line">Eight of Clubs</span><br><span class="line">Nine of Clubs</span><br><span class="line">Jack of Clubs</span><br><span class="line">Queen of Clubs</span><br><span class="line">King of Clubs</span><br><span class="line">Two of Diamonds</span><br><span class="line">Three of Diamonds</span><br><span class="line">Four of Diamonds</span><br><span class="line">Five of Diamonds</span><br><span class="line">Seven of Diamonds</span><br><span class="line">Eight of Diamonds</span><br><span class="line">Nine of Diamonds</span><br><span class="line">Queen of Diamonds</span><br><span class="line">King of Diamonds</span><br><span class="line">Ace of Diamonds</span><br><span class="line">Two of Hearts</span><br><span class="line">Four of Hearts</span><br><span class="line">Five of Hearts</span><br><span class="line">Seven of Hearts</span><br><span class="line">Ten of Hearts</span><br><span class="line">King of Hearts</span><br><span class="line">Ace of Hearts</span><br><span class="line">Two of Spades</span><br><span class="line">Four of Spades</span><br><span class="line">Five of Spades</span><br><span class="line">Six of Spades</span><br><span class="line">Seven of Spades</span><br><span class="line">Eight of Spades</span><br><span class="line">Nine of Spades</span><br><span class="line">Ten of Spades</span><br><span class="line">Jack of Spades</span><br><span class="line">Queen of Spades</span><br><span class="line">King of Spades</span><br><span class="line">Ace of Spades</span><br><span class="line">========================</span><br><span class="line"></span><br><span class="line">===== Hand Pockers =====</span><br><span class="line">Three of Clubs</span><br><span class="line">Ten of Clubs</span><br><span class="line">Ace of Clubs</span><br><span class="line">Six of Diamonds</span><br><span class="line">Ten of Diamonds</span><br><span class="line">Jack of Diamonds</span><br><span class="line">Three of Hearts</span><br><span class="line">Six of Hearts</span><br><span class="line">Eight of Hearts</span><br><span class="line">Nine of Hearts</span><br><span class="line">Jack of Hearts</span><br><span class="line">Queen of Hearts</span><br><span class="line">Three of Spades</span><br><span class="line">========================</span><br></pre></td></tr></table></figure>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>以上源码放在<a href="https://github.com/hpcplus2/Pocker.git" target="_blank" rel="noopener">Git</a>了，可直接下载运行。</p>
 
       
     </div>
@@ -404,6 +402,8 @@
           
             <a href="/tags/Javascript/" rel="tag"># Javascript</a>
           
+            <a href="/tags/Javascript权威指南/" rel="tag"># Javascript权威指南</a>
+          
         </div>
       
 
@@ -415,15 +415,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/01/08/关于防抖动-Debounce-和节流-Throttle/" rel="next" title="关于防抖动(Debounce)和节流(Throttle)">
+                <i class="fa fa-chevron-left"></i> 关于防抖动(Debounce)和节流(Throttle)
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/01/15/Javascript权威指南源码分析-扑克牌类/" rel="prev" title="Javascript权威指南源码分析-扑克牌类">
-                Javascript权威指南源码分析-扑克牌类 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -559,7 +559,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#了解背景"><span class="nav-number">1.</span> <span class="nav-text">了解背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是Debounce"><span class="nav-number">2.</span> <span class="nav-text">什么是Debounce</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是Throttle"><span class="nav-number">3.</span> <span class="nav-text">什么是Throttle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何使用"><span class="nav-number">4.</span> <span class="nav-text">如何使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结论"><span class="nav-number">5.</span> <span class="nav-text">结论</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源代码"><span class="nav-number">2.</span> <span class="nav-text">源代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#enumeration类"><span class="nav-number">2.1.</span> <span class="nav-text">enumeration类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#poker类"><span class="nav-number">2.2.</span> <span class="nav-text">poker类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#deck类"><span class="nav-number">2.3.</span> <span class="nav-text">deck类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试代码"><span class="nav-number">2.4.</span> <span class="nav-text">测试代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行结果"><span class="nav-number">2.5.</span> <span class="nav-text">运行结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">3.</span> <span class="nav-text">其他</span></a></li></ol></div>
             
 
           </div>
