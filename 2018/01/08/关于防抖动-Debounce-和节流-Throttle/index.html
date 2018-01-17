@@ -91,7 +91,7 @@
 <meta property="og:site_name" content="Twenty One">
 <meta property="og:description" content="了解背景某项目中，需要实现一个及时搜索框，当用户输入关键字即去搜索相关数据。项目框架为React，使用onChange来监听input的输入事件。初步完成之后发现了问题，用户输入一个中文，会多次调用change事件，因每一次拼音的输入都会触发change事件。随即我决定采用延迟调用的方式去处理，沿着这个思路，发现了throttle-debounce，同时对debounce有了初步了解。 什么是De">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-08T16:51:08.000Z">
+<meta property="og:updated_time" content="2018-01-17T13:32:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于防抖动(Debounce)和节流(Throttle)">
 <meta name="twitter:description" content="了解背景某项目中，需要实现一个及时搜索框，当用户输入关键字即去搜索相关数据。项目框架为React，使用onChange来监听input的输入事件。初步完成之后发现了问题，用户输入一个中文，会多次调用change事件，因每一次拼音的输入都会触发change事件。随即我决定采用延迟调用的方式去处理，沿着这个思路，发现了throttle-debounce，同时对debounce有了初步了解。 什么是De">
@@ -393,6 +393,7 @@
 <p>个人理解： 函数在预定义的执行周期内，最多执行一次</p>
 <p>例如onscroll事件，在一个无限滚动的内容区域内，我们必须检测滚动条距离底部的位置，如果使用debounce则会造成用户滚动底部停止动作了才去请求数据的情况。</p>
 <p>而使用throttle则可以保障我们不断的去检查滚动条的位置，及时获取数据。</p>
+<a id="more"></a>
 <h2 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h2><p>debounce和throttle的轮子已经非常多了，没有必要自己去实现一套。这里推荐一种方式，使用Lodash的自定义库，生成的代码仅2kb。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install -g lodash-cli</span><br><span class="line">lodash include=debounce,throttle</span><br></pre></td></tr></table></figure>
 <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>debounce和throttle都可以帮助我们延时执行函数，但是具体该用哪一个就需要按照自己的实际需求去选择了。</p>
