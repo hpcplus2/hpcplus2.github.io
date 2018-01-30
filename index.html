@@ -383,8 +383,7 @@
 
       
         
-          
-            <h2 id="什么是Portal"><a href="#什么是Portal" class="headerlink" title="什么是Portal"></a>什么是Portal</h2><p>在React v16.0的更新中，React给我们带来了一个新特性，那就是Portals，这个单词有一个非常形象的翻译 — “传送门”。</p>
+          <h2 id="什么是Portal"><a href="#什么是Portal" class="headerlink" title="什么是Portal"></a>什么是Portal</h2><p>在React v16.0的更新中，React给我们带来了一个新特性，那就是Portals，这个单词有一个非常形象的翻译 — “传送门”。</p>
 <p>如果大家看过叮当猫，相信对它的一个道具印象非常深刻，那就是任意门。叮当猫的任意门就是一个传送门，当人们钻进这个门，可以从指定的另一个地方出来。</p>
 <h2 id="官方解释"><a href="#官方解释" class="headerlink" title="官方解释"></a>官方解释</h2><blockquote>
 <p>Portals provide a first-class way to render children into a DOM node that exists outside the DOM hierarchy of the parent component.</p>
@@ -415,70 +414,13 @@
 <li><p>并不真正render在被声明的地方</p>
 </li>
 </ul>
-<h2 id="在React-v16-0之前，如何实现Portal"><a href="#在React-v16-0之前，如何实现Portal" class="headerlink" title="在React v16.0之前，如何实现Portal"></a>在React v16.0之前，如何实现Portal</h2><p>需要用到ReactDom中的两个函数</p>
-<ul>
-<li><p>unstable_renderSubtreeIntoContainer</p>
-</li>
-<li><p>unmountComponentAtNode</p>
-</li>
-</ul>
-<pre><code>export default Class DialogWrap extends React.Component {
-  componentDidMount() {
-    const container = document.createElement(&apos;div&apos;);
-    document.body.appendChild(container);
-    this.container = container;
-    this.renderDialog(this.props);
-  }
-  componentDidUpdate() {
-    this.renderDialog(this.props);
-  }
-  componentWillUnmount() {
-    if (this.container) {
-      ReactDOM.unmountComponentAtNode(this.container);
-      this.container = null;
-    }
-  }
-  renderDialog(props) {
-    ReactDOM.unstable_renderSubtreeIntoContainer(
-      this, 
-      &lt;Dialog {...props} /&gt;,   // 组件
-      this.container,   // 需要渲染&lt;Dialog /&gt;的Dom node
-    );
-  }
-  render() {
-    return null;
-  }
-}
-</code></pre><blockquote>
-<p>注意，在最新的React v16.0中，这两个函数还能使用。但是推荐替换为createPortal.</p>
-</blockquote>
-<h2 id="React-v16-0的实现方式"><a href="#React-v16-0的实现方式" class="headerlink" title="React v16.0的实现方式"></a>React v16.0的实现方式</h2><pre><code>export default Class DialogWrap extends React.Component {
-  constructor(props) {
-    super(props);
-    const container = document.createElement(&apos;div&apos;);
-    document.body.appendChild(container);
-    this.container = container;
-  }
-  componentWillUnmount() {
-    if (this.container) {
-      this.container.parentNode.removeChild(this.container); 
-      this.container = null;
-    }
-  }
-  render() {
-    return (ReactDOM.createPortal(&lt;Dialog {...props} /&gt;, this.container));
-  }
-}
-</code></pre><h2 id="React-Portal的事件冒泡"><a href="#React-Portal的事件冒泡" class="headerlink" title="React Portal的事件冒泡"></a>React Portal的事件冒泡</h2><p>React v16.0通过createPortal创建出来的组件，它的事件可以传递到其React组件对应的父组件上，而不是真实绑定的Dom node上。通过<em>unstable_renderSubtreeIntoContainer</em>创建出来的组件无法实现该特性的。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Portals的典型用法就是当父节点存在 <em>overflow: hidden</em> 或者 <em>z-index</em> 属性的时候，允许子节点打破这些限制。例如Dialog, Modal, tooltips等组件.</p>
-<blockquote>
-<p>文章内容参考自:</p>
-<p><a href="https://reactjs.org/docs/portals.html" target="_blank" rel="noopener">React官网 - Portals</a></p>
-<p><a href="https://zhuanlan.zhihu.com/p/29880992" target="_blank" rel="noopener">知乎 - 《传送门: React Portal》</a></p>
-<p><a href="https://github.com/react-component/m-dialog/blob/master/src/DialogWrap.tsx" target="_blank" rel="noopener">react-component - DialogWrap.tsx</a></p>
-</blockquote>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/01/30/关于传送门React-Portal/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
