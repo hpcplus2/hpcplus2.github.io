@@ -280,6 +280,251 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/30/关于传送门React-Portal/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hpcherry">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://cn.gravatar.com/userimage/112842032/73fd3bf04f51d455c72fa51465bcfb08.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Twenty One">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/30/关于传送门React-Portal/" itemprop="url">关于传送门React-Portal</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-30T22:56:06+08:00">
+                2018-01-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">Javascript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/01/30/关于传送门React-Portal/" class="leancloud_visitors" data-flag-title="关于传送门React-Portal">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="什么是Portal"><a href="#什么是Portal" class="headerlink" title="什么是Portal"></a>什么是Portal</h2><p>在React v16.0的更新中，React给我们带来了一个新特性，那就是Portals，这个单词有一个非常形象的翻译 — “传送门”。</p>
+<p>如果大家看过叮当猫，相信对它的一个道具印象非常深刻，那就是任意门。叮当猫的任意门就是一个传送门，当人们钻进这个门，可以从指定的另一个地方出来。</p>
+<h2 id="官方解释"><a href="#官方解释" class="headerlink" title="官方解释"></a>官方解释</h2><blockquote>
+<p>Portals provide a first-class way to render children into a DOM node that exists outside the DOM hierarchy of the parent component.</p>
+</blockquote>
+<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><pre><code>render() {
+  // The first argument (child) is any renderable React child, such as an element, 
+     string, or fragment. The second argument (container) is a DOM element.  
+  return ReactDOM.createPortal(
+    this.props.children,
+    domNode,
+  );
+}
+</code></pre><h2 id="为什么我们需要Portal"><a href="#为什么我们需要Portal" class="headerlink" title="为什么我们需要Portal"></a>为什么我们需要Portal</h2><p>在使用React的时候，如果我们需要在某个组件中使用Dialog，这是用大致代码如下:</p>
+<pre><code>render() {
+  return (
+    &lt;div className=&quot;dialog-element-parent&quot;&gt;
+      {components}
+      &lt;Dialog /&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre><p>一般来说，我们希望Dialog显示在屏幕正中央，但是如果<code>div.dialog-element-parent</code>仅仅只是一个小窗口，那我们实现起来就比较麻烦了。</p>
+<p>如果我们的项目需要的各类Dialog样式相对较统一，我们可以将Dialog放到组件树的最顶层，然后通过redux等组件间通信方式，来给Dialog发送信息去展示内容。但是这样Dialog的内容无法支持完全定制。</p>
+<p>所以我们需要一个Portal来实现我们想要的效果:</p>
+<ul>
+<li><p>声明式的写在一个组件中</p>
+</li>
+<li><p>并不真正render在被声明的地方</p>
+</li>
+</ul>
+<h2 id="在React-v16-0之前，如何实现Portal"><a href="#在React-v16-0之前，如何实现Portal" class="headerlink" title="在React v16.0之前，如何实现Portal"></a>在React v16.0之前，如何实现Portal</h2><p>需要用到ReactDom中的两个函数</p>
+<ul>
+<li><p>unstable_renderSubtreeIntoContainer</p>
+</li>
+<li><p>unmountComponentAtNode</p>
+</li>
+</ul>
+<pre><code>export default Class DialogWrap extends React.Component {
+  componentDidMount() {
+    const container = document.createElement(&apos;div&apos;);
+    document.body.appendChild(container);
+    this.container = container;
+    this.renderDialog(this.props);
+  }
+  componentDidUpdate() {
+    this.renderDialog(this.props);
+  }
+  componentWillUnmount() {
+    if (this.container) {
+      ReactDOM.unmountComponentAtNode(this.container);
+      this.container = null;
+    }
+  }
+  renderDialog(props) {
+    ReactDOM.unstable_renderSubtreeIntoContainer(
+      this, 
+      &lt;Dialog {...props} /&gt;,   // 组件
+      this.container,   // 需要渲染&lt;Dialog /&gt;的Dom node
+    );
+  }
+  render() {
+    return null;
+  }
+}
+</code></pre><blockquote>
+<p>注意，在最新的React v16.0中，这两个函数还能使用。但是推荐替换为createPortal.</p>
+</blockquote>
+<h2 id="React-v16-0的实现方式"><a href="#React-v16-0的实现方式" class="headerlink" title="React v16.0的实现方式"></a>React v16.0的实现方式</h2><pre><code>export default Class DialogWrap extends React.Component {
+  constructor(props) {
+    super(props);
+    const container = document.createElement(&apos;div&apos;);
+    document.body.appendChild(container);
+    this.container = container;
+  }
+  componentWillUnmount() {
+    if (this.container) {
+      this.container.parentNode.removeChild(this.container); 
+      this.container = null;
+    }
+  }
+  render() {
+    return (ReactDOM.createPortal(&lt;Dialog {...props} /&gt;, this.container));
+  }
+}
+</code></pre><h2 id="React-Portal的事件冒泡"><a href="#React-Portal的事件冒泡" class="headerlink" title="React Portal的事件冒泡"></a>React Portal的事件冒泡</h2><p>React v16.0通过createPortal创建出来的组件，它的事件可以传递到其React组件对应的父组件上，而不是真实绑定的Dom node上。通过<em>unstable_renderSubtreeIntoContainer</em>创建出来的组件无法实现该特性的。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Portals的典型用法就是当父节点存在 <em>overflow: hidden</em> 或者 <em>z-index</em> 属性的时候，允许子节点打破这些限制。例如Dialog, Modal, tooltips等组件.</p>
+<blockquote>
+<p>文章内容参考自:</p>
+<p><a href="https://reactjs.org/docs/portals.html" target="_blank" rel="noopener">React官网 - Portals</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/29880992" target="_blank" rel="noopener">知乎 - 《传送门: React Portal》</a></p>
+<p><a href="https://github.com/react-component/m-dialog/blob/master/src/DialogWrap.tsx" target="_blank" rel="noopener">react-component - DialogWrap.tsx</a></p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/15/Javascript权威指南源码分析-扑克牌类/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -649,7 +894,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -671,7 +916,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
