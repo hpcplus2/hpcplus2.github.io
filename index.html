@@ -386,7 +386,9 @@
           <blockquote>
 <p>通过Refs，用户可以直接访问DOM节点或者React.render()创建的组件实例.</p>
 </blockquote>
-<p>在典型的React数据流中(单向数据流)，<code>props</code>是父子组件交互的唯一途径。通过传递新的<code>props</code>, 可以修改子组件。<br>但是，在某些情况下可能需要在数据流之外去强制修改子组件。要修改的对象可能是DOM节点也可能是React组件实例。<br>对于这两种情况，React提供了相应的方法。</p>
+<p>在典型的React数据流中(单向数据流)，<code>props</code>是父子组件交互的唯一途径。通过传递新的<code>props</code>, 可以修改子组件。
+但是，在某些情况下可能需要在数据流之外去强制修改子组件。要修改的对象可能是DOM节点也可能是React组件实例。
+对于这两种情况，React提供了相应的方法。</p>
 <h2 id="When-to-Use-Refs-什么时候使用Refs"><a href="#When-to-Use-Refs-什么时候使用Refs" class="headerlink" title="When to Use Refs - 什么时候使用Refs"></a>When to Use Refs - 什么时候使用Refs</h2><p>这里有几个很好的用例：</p>
 <ul>
 <li><p>管理focus事件、文本选择或者媒体播放</p>
@@ -398,8 +400,10 @@
 </ul>
 <p>如果可以通过声明式方式去解决，请避免使用refs。</p>
 <p>举个例子: Dialog组件不要暴露open(), close()等方法。而是使用isOpen属性去控制。</p>
-<h2 id="Don’t-Overuse-Refs-不要过度使用Refs"><a href="#Don’t-Overuse-Refs-不要过度使用Refs" class="headerlink" title="Don’t Overuse Refs - 不要过度使用Refs"></a>Don’t Overuse Refs - 不要过度使用Refs</h2><p>你首先想到通过refs去做点什么。如果是这种情况，请花点时间思考一下是否能在组件中使用state来达到相应的功能。<br>通常使用更高层次的state会使结构更清晰。(<a href="https://reactjs.org/docs/lifting-state-up.html" target="_blank" rel="noopener">状态提升</a>)</p>
-<h2 id="Creating-Refs-创建Refs"><a href="#Creating-Refs-创建Refs" class="headerlink" title="Creating Refs - 创建Refs"></a>Creating Refs - 创建Refs</h2><p>Refs可以通过<code>React.createRef()</code>创建，同时也可以通过ref属性直接附加到React元素上。<br>在组件被构造的时候，refs会被赋予一个实例属性，以便他们可以在整个组件中被引用。</p>
+<h2 id="Don’t-Overuse-Refs-不要过度使用Refs"><a href="#Don’t-Overuse-Refs-不要过度使用Refs" class="headerlink" title="Don’t Overuse Refs - 不要过度使用Refs"></a>Don’t Overuse Refs - 不要过度使用Refs</h2><p>你首先想到通过refs去做点什么。如果是这种情况，请花点时间思考一下是否能在组件中使用state来达到相应的功能。
+通常使用更高层次的state会使结构更清晰。(<a href="https://reactjs.org/docs/lifting-state-up.html" target="_blank" rel="noopener">状态提升</a>)</p>
+<h2 id="Creating-Refs-创建Refs"><a href="#Creating-Refs-创建Refs" class="headerlink" title="Creating Refs - 创建Refs"></a>Creating Refs - 创建Refs</h2><p>Refs可以通过<code>React.createRef()</code>创建，同时也可以通过ref属性直接附加到React元素上。
+在组件被构造的时候，refs会被赋予一个实例属性，以便他们可以在整个组件中被引用。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">class MyComponent extends React.Component &#123;</span><br><span class="line">  constructor(props) &#123;</span><br><span class="line">    super(props);</span><br><span class="line">    this.myRef = React.createRef();</span><br><span class="line">  &#125;</span><br><span class="line">  render() &#123;</span><br><span class="line">    return &lt;div ref=&#123;this.myRef&#125; /&gt;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
