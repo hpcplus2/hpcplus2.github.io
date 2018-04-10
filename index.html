@@ -400,11 +400,11 @@
 </ul>
 <p>如果可以通过声明式方式去解决，请避免使用refs。</p>
 <p>举个例子: Dialog组件不要暴露open(), close()等方法。而是使用isOpen属性去控制。</p>
-<h2 id="Don’t-Overuse-Refs-不要过度使用Refs"><a href="#Don’t-Overuse-Refs-不要过度使用Refs" class="headerlink" title="Don’t Overuse Refs - 不要过度使用Refs"></a>Don’t Overuse Refs - 不要过度使用Refs</h2><p>你首先想到通过refs去做点什么。如果是这种情况，请花点时间思考一下是否能在组件中使用state来达到相应的功能。
+<h2 id="Don’t-Overuse-Refs-不要过度使用Refs"><a href="#Don’t-Overuse-Refs-不要过度使用Refs" class="headerlink" title="Don’t Overuse Refs - 不要过度使用Refs"></a>Don’t Overuse Refs - 不要过度使用Refs</h2><p>当你首先想到通过refs去做些什么的时候，请花点时间思考一下是否能在组件中使用state来达到相应的功能。
 通常使用更高层次的state会使结构更清晰。(<a href="https://reactjs.org/docs/lifting-state-up.html" target="_blank" rel="noopener">状态提升</a>)</p>
 <h2 id="Creating-Refs-创建Refs"><a href="#Creating-Refs-创建Refs" class="headerlink" title="Creating Refs - 创建Refs"></a>Creating Refs - 创建Refs</h2><p>Refs可以通过<code>React.createRef()</code>创建，同时也可以通过ref属性直接附加到React元素上。
 在组件被构造的时候，refs会被赋予一个实例属性，以便他们可以在整个组件中被引用。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">class MyComponent extends React.Component &#123;</span><br><span class="line">  constructor(props) &#123;</span><br><span class="line">    super(props);</span><br><span class="line">    this.myRef = React.createRef();</span><br><span class="line">  &#125;</span><br><span class="line">  render() &#123;</span><br><span class="line">    return &lt;div ref=&#123;this.myRef&#125; /&gt;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class MyComponent extends React.Component &#123;</span><br><span class="line">  constructor(props) &#123;</span><br><span class="line">    super(props);</span><br><span class="line">    this.myRef = React.createRef();</span><br><span class="line">  &#125;</span><br><span class="line">  render() &#123;</span><br><span class="line">    return &lt;div ref=&#123;this.myRef&#125; /&gt;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/04/09/翻译系列-React-Refs-and-the-DOM/#more" rel="contents">
@@ -1036,7 +1036,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
