@@ -72,7 +72,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="-Javascript -React," />
 
 
 
@@ -83,16 +83,18 @@
 
 
 
-<meta name="description" content="mark something">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Twenty One">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="通过Refs，用户可以直接访问DOM节点或者React.render()创建的组件实例.  在典型的React数据流中(单向数据流)，props是父子组件交互的唯一途径。通过传递新的props, 可以修改子组件。但是，在某些情况下可能需要在数据流之外去强制修改子组件。要修改的对象可能是DOM节点也可能是React组件实例。对于这两种情况，React提供了相应的方法。 When to Use Re">
+<meta name="keywords" content="-Javascript -React">
+<meta property="og:type" content="article">
+<meta property="og:title" content="翻译系列: React - Refs and the DOM">
+<meta property="og:url" content="http://yoursite.com/2018/04/09/翻译系列-React-Refs-and-the-DOM/index.html">
 <meta property="og:site_name" content="Twenty One">
-<meta property="og:description" content="mark something">
+<meta property="og:description" content="通过Refs，用户可以直接访问DOM节点或者React.render()创建的组件实例.  在典型的React数据流中(单向数据流)，props是父子组件交互的唯一途径。通过传递新的props, 可以修改子组件。但是，在某些情况下可能需要在数据流之外去强制修改子组件。要修改的对象可能是DOM节点也可能是React组件实例。对于这两种情况，React提供了相应的方法。 When to Use Re">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-04-10T14:12:05.778Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Twenty One">
-<meta name="twitter:description" content="mark something">
+<meta name="twitter:title" content="翻译系列: React - Refs and the DOM">
+<meta name="twitter:description" content="通过Refs，用户可以直接访问DOM节点或者React.render()创建的组件实例.  在典型的React数据流中(单向数据流)，props是父子组件交互的唯一途径。通过传递新的props, 可以修改子组件。但是，在某些情况下可能需要在数据流之外去强制修改子组件。要修改的对象可能是DOM节点也可能是React组件实例。对于这两种情况，React提供了相应的方法。 When to Use Re">
 
 
 
@@ -122,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/04/09/翻译系列-React-Refs-and-the-DOM/"/>
 
 
 
 
 
-  <title>Twenty One</title>
+  <title>翻译系列: React - Refs and the DOM | Twenty One</title>
   
 
 
@@ -147,8 +149,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -265,9 +266,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -297,9 +298,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/09/翻译系列-React-Refs-and-the-DOM/" itemprop="url">翻译系列: React - Refs and the DOM</a></h1>
+          <h1 class="post-title" itemprop="name headline">翻译系列: React - Refs and the DOM</h1>
         
 
         <div class="post-meta">
@@ -382,8 +381,7 @@
       
 
       
-        
-          <blockquote>
+        <blockquote>
 <p>通过Refs，用户可以直接访问DOM节点或者React.render()创建的组件实例.</p>
 </blockquote>
 <p>在典型的React数据流中(单向数据流)，<code>props</code>是父子组件交互的唯一途径。通过传递新的<code>props</code>, 可以修改子组件。<br>但是，在某些情况下可能需要在数据流之外去强制修改子组件。要修改的对象可能是DOM节点也可能是React组件实例。<br>对于这两种情况，React提供了相应的方法。</p>
@@ -401,365 +399,57 @@
 <h2 id="Don’t-Overuse-Refs-不要过度使用Refs"><a href="#Don’t-Overuse-Refs-不要过度使用Refs" class="headerlink" title="Don’t Overuse Refs - 不要过度使用Refs"></a>Don’t Overuse Refs - 不要过度使用Refs</h2><p>你首先想到通过refs去做点什么。如果是这种情况，请花点时间思考一下是否能在组件中使用state来达到相应的功能。<br>通常使用更高层次的state会使结构更清晰。(<a href="https://reactjs.org/docs/lifting-state-up.html" target="_blank" rel="noopener">状态提升</a>)</p>
 <h2 id="Creating-Refs-创建Refs"><a href="#Creating-Refs-创建Refs" class="headerlink" title="Creating Refs - 创建Refs"></a>Creating Refs - 创建Refs</h2><p>Refs可以通过<code>React.createRef()</code>创建，同时也可以通过ref属性直接附加到React元素上。<br>在组件被构造的时候，refs会被赋予一个实例属性，以便他们可以在整个组件中被引用。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">class MyComponent extends React.Component &#123;</span><br><span class="line">  constructor(props) &#123;</span><br><span class="line">    super(props);</span><br><span class="line">    this.myRef = React.createRef();</span><br><span class="line">  &#125;</span><br><span class="line">  render() &#123;</span><br><span class="line">    return &lt;div ref=&#123;this.myRef&#125; /&gt;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/09/翻译系列-React-Refs-and-the-DOM/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/30/关于传送门React-Portal/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="hpcherry">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://cn.gravatar.com/userimage/112842032/73fd3bf04f51d455c72fa51465bcfb08.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Twenty One">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/30/关于传送门React-Portal/" itemprop="url">关于传送门React-Portal</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-30T22:56:06+08:00">
-                2018-01-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Javascript/" itemprop="url" rel="index">
-                    <span itemprop="name">Javascript</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/01/30/关于传送门React-Portal/" class="leancloud_visitors" data-flag-title="关于传送门React-Portal">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="什么是Portal"><a href="#什么是Portal" class="headerlink" title="什么是Portal"></a>什么是Portal</h2><p>在React v16.0的更新中，React给我们带来了一个新特性，那就是Portals，这个单词有一个非常形象的翻译 — “传送门”。</p>
-<p>如果大家看过叮当猫，相信对它的一个道具印象非常深刻，那就是任意门。叮当猫的任意门就是一个传送门，当人们钻进这个门，可以从指定的另一个地方出来。</p>
-<h2 id="官方解释"><a href="#官方解释" class="headerlink" title="官方解释"></a>官方解释</h2><blockquote>
-<p>Portals provide a first-class way to render children into a DOM node that exists outside the DOM hierarchy of the parent component.</p>
-</blockquote>
-<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><pre><code>render() {
-  // The first argument (child) is any renderable React child, such as an element, 
-     string, or fragment. The second argument (container) is a DOM element.  
-  return ReactDOM.createPortal(
-    this.props.children,
-    domNode,
-  );
-}
-</code></pre><h2 id="为什么我们需要Portal"><a href="#为什么我们需要Portal" class="headerlink" title="为什么我们需要Portal"></a>为什么我们需要Portal</h2><p>在使用React的时候，如果我们需要在某个组件中使用Dialog，大致代码如下:</p>
-<pre><code>render() {
-  return (
-    &lt;div className=&quot;dialog-element-parent&quot;&gt;
-      {components}
-      &lt;Dialog /&gt;
-    &lt;/div&gt;
-  );
-}
-</code></pre><p>一般来说，我们希望Dialog显示在屏幕正中央，但是如果<code>div.dialog-element-parent</code>仅仅只是一个小窗口，那我们实现起来就比较麻烦了。</p>
-<p>如果我们的项目需要的各类Dialog样式相对较统一，我们可以将Dialog放到组件树的最顶层，然后通过redux等组件间通信方式，来给Dialog发送信息去展示内容。但是这样Dialog的内容无法支持完全定制。</p>
-<p>所以我们需要一个Portal来实现我们想要的效果:</p>
+<a id="more"></a>
+<h2 id="Accessing-Refs-访问Refs"><a href="#Accessing-Refs-访问Refs" class="headerlink" title="Accessing Refs - 访问Refs"></a>Accessing Refs - 访问Refs</h2><p>当ref被传递给render中的元素后，就可以通过ref的<code>current</code>属性去访问该节点的引用了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">const node = this.myRef.current;</span><br></pre></td></tr></table></figure>
+<p>ref的值根据节点的类型决定:</p>
 <ul>
-<li><p>声明式的写在一个组件中</p>
+<li><p>当ref属性作用在HTML标签上，在构造函数中通过React.createRef()创建的ref接受基础的DOM元素作为current的值。</p>
 </li>
-<li><p>并不真正render在被声明的地方</p>
+<li><p>当ref属性作用在自定义的组件上，ref的current等于当前已挂载的组件实例。</p>
+</li>
+<li><p>不能在无状态组件上使用ref，因为他们没有实例。</p>
 </li>
 </ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/01/30/关于传送门React-Portal/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/15/Javascript权威指南源码分析-扑克牌类/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="hpcherry">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://cn.gravatar.com/userimage/112842032/73fd3bf04f51d455c72fa51465bcfb08.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Twenty One">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/15/Javascript权威指南源码分析-扑克牌类/" itemprop="url">Javascript权威指南源码分析-扑克牌类</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-15T23:33:46+08:00">
-                2018-01-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Javascript/" itemprop="url" rel="index">
-                    <span itemprop="name">Javascript</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/01/15/Javascript权威指南源码分析-扑克牌类/" class="leancloud_visitors" data-flag-title="Javascript权威指南源码分析-扑克牌类">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
-<p>书本介绍: 《Javascript权威指南 第六版》</p>
-<p>章节：第9章 类和模块</p>
-<p>代码案例: [9.7, 9.8]</p>
+<p>下面的例子说明了不同之处：</p>
+<h3 id="Adding-a-Ref-to-a-DOM-Element"><a href="#Adding-a-Ref-to-a-DOM-Element" class="headerlink" title="Adding a Ref to a DOM Element"></a>Adding a Ref to a DOM Element</h3><p>这个例子用ref去存储DOM节点</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">class CustomTextInput extends React.Component &#123;</span><br><span class="line">  constructor(props) &#123;</span><br><span class="line">    super(props);</span><br><span class="line">    // create a ref to store the textInput DOM element</span><br><span class="line">    this.textInput = React.createRef();</span><br><span class="line">    this.focusTextInput = this.focusTextInput.bind(this);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  focusTextInput() &#123;</span><br><span class="line">    // Explicitly focus the text input using the raw DOM API</span><br><span class="line">    // Note: we&apos;re accessing &quot;current&quot; to get the DOM node</span><br><span class="line">    this.textInput.current.focus();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    // tell React that we want the associate the &lt;input&gt; ref</span><br><span class="line">    // with the `textInput` that we created in the constructor</span><br><span class="line">    return (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;input</span><br><span class="line">          type=&quot;text&quot;</span><br><span class="line">          ref=&#123;this.textInput&#125; </span><br><span class="line">        /&gt;</span><br><span class="line"></span><br><span class="line">        &lt;input</span><br><span class="line">          type=&quot;button&quot;</span><br><span class="line">          value=&quot;Focus the text input&quot;</span><br><span class="line">          onClick=&#123;this.focusTextInput&#125;</span><br><span class="line">        /&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>React会在组件装载后，将DOM节点元素赋予ref的<code>current</code>属性，并且在卸载后将其置空。<br>ref的更新发生在<code>componentDidMount</code>和<code>componentDidUpdate</code>之前</p>
+<h3 id="Adding-a-Ref-to-a-Class-Component"><a href="#Adding-a-Ref-to-a-Class-Component" class="headerlink" title="Adding a Ref to a Class Component"></a>Adding a Ref to a Class Component</h3><p>如果想封装CustomText来实现装载结束后立即点击一次的效果，我们可以通过ref去访问CustomText并调用focusTextInput方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">class AutoFocusTextInput extends React.Component &#123;</span><br><span class="line">   constructor(props) &#123;</span><br><span class="line">     super(props);</span><br><span class="line">     this.textInput = React.createRef();</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   componentDidMount() &#123;</span><br><span class="line">     this.textInput.current.focusTextInput();</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   render() &#123;</span><br><span class="line">     return (</span><br><span class="line">       &lt;CustomTextInput ref=&#123;this.textInput&#125; /&gt;</span><br><span class="line">     );</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>请注意，仅当CustomTextInput被声明为类的情况下才有效。</p>
+<h3 id="Refs-and-Functional-Components"><a href="#Refs-and-Functional-Components" class="headerlink" title="Refs and Functional Components"></a>Refs and Functional Components</h3><p><em>你不能在无状态组件上添加ref属性</em>，因为他们没有实例。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">function MyFunctionalComponent() &#123;</span><br><span class="line">  return &lt;input /&gt;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Parent extends React.Component &#123;</span><br><span class="line">  constructor(props) &#123;</span><br><span class="line">    super(props);</span><br><span class="line">    this.textInput = React.createRef();</span><br><span class="line">  &#125;</span><br><span class="line">  render() &#123;</span><br><span class="line">    // This will *not* work!</span><br><span class="line">    return (</span><br><span class="line">      &lt;MyFunctionalComponent ref=&#123;this.textInput&#125; /&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当你需要ref的时候，你应该将组件转换成类组件，就像需要生命周期和state一样。</p>
+<p>然而，我们可以在无状态组件内部使用ref来引用一个DOM节点或者类组件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">function CustomTextInput(props) &#123;</span><br><span class="line">  // textInput must be declared here so the ref can refer to it</span><br><span class="line">  let textInput = React.createRef();</span><br><span class="line"></span><br><span class="line">  function handleClick() &#123;</span><br><span class="line">    textInput.current.focus();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  return (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;input</span><br><span class="line">        type=&quot;text&quot;</span><br><span class="line">        ref=&#123;textInput&#125; /&gt;</span><br><span class="line"></span><br><span class="line">      &lt;input</span><br><span class="line">        type=&quot;button&quot;</span><br><span class="line">        value=&quot;Focus the text input&quot;</span><br><span class="line">        onClick=&#123;handleClick&#125;</span><br><span class="line">      /&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Exposing-DOM-Refs-to-Parent-Components-将Refs暴露给父组件"><a href="#Exposing-DOM-Refs-to-Parent-Components-将Refs暴露给父组件" class="headerlink" title="Exposing DOM Refs to Parent Components - 将Refs暴露给父组件"></a>Exposing DOM Refs to Parent Components - 将Refs暴露给父组件</h2><p>在某些情况下，你可能想通过父组件去访问子组件的DOM节点。<br>通常不鼓励这种行为，这样会破坏掉组件的封装性。<br>但是偶尔会用这种方法来触发焦点或者测量子节点的大小或者位置。</p>
+<p>虽然你可以给子组件添加ref，但是这不是一个理想的方法，因为你获得的是子组件的实例而不是想要的DOM节点。<br>另外，对于无状态组件这样是无效的。</p>
+<p>在这种情况下，我们推荐暴露子组件的特殊prop。这个prop可以不叫ref(不如InputRef)。子组件将该属性作为对应DOM节点的ref属性。<br>这样父组件就可以通过中间件来传递ref到子组件上。</p>
+<p>这个方式使用类组件和无状态组件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">function CustomTextInput(props) &#123;</span><br><span class="line">  return (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;input ref=&#123;props.inputRef&#125; /&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Parent extends React.Component &#123;</span><br><span class="line">  constructor(props) &#123;</span><br><span class="line">    super(props);</span><br><span class="line">    this.inputElement = React.createRef();</span><br><span class="line">  &#125;</span><br><span class="line">  render() &#123;</span><br><span class="line">    return (</span><br><span class="line">      &lt;CustomTextInput inputRef=&#123;this.inputElement&#125; /&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在上面的例子中，Parent传递自身属性<code>this.inputElement</code>到<code>CustomTextInput</code>的<code>inputRef</code>prop，<br><code>CustomTextInput</code>将其作为ref属性赋予<code>input</code>。结果，Parent中的<code>this.inputElement.current</code>等同于Input的DOM节点。</p>
+<p>注意<code>inputRef</code>在上面的例子中没有什么特殊的意义，仅仅只是一个component的prop。<br>然而，对于<code>&lt;input&gt;</code>的<code>ref</code>是很重要的，他告诉React附加ref到它的DOM节点上。</p>
+<p>即使<code>CustomTextInput</code>是一个无状态组件，依然可以工作。不像ref只能作用在DOM节点和类组件上，对于像<code>inputRef</code>这样的组件属性没有限制。</p>
+<p>这种模式的另一个好处是即使组件嵌套的层级很深依然有效。示例如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">function CustomTextInput(props) &#123;</span><br><span class="line">  return (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;input ref=&#123;props.inputRef&#125; /&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function Parent(props) &#123;</span><br><span class="line">  return (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      My input: &lt;CustomTextInput inputRef=&#123;props.inputRef&#125; /&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Grandparent extends React.Component &#123;</span><br><span class="line">  constructor(props) &#123;</span><br><span class="line">    super(props);</span><br><span class="line">    this.inputElement = React.createRef();</span><br><span class="line">  &#125;</span><br><span class="line">  render() &#123;</span><br><span class="line">    return (</span><br><span class="line">      &lt;Parent inputRef=&#123;this.inputElement&#125; /&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>参照上面的例子，<code>GrandParent</code>指定了<code>this.inputElement</code>。<br>然后通过<code>inputRef</code>这个prop传递给<code>Parent</code>，然后<code>Parent</code>将其通过<code>inputRef</code>传递给<code>CustomTextInput</code>。<br>最终，<code>CustomTextInput</code>将<code>inputRef</code>加到<code>&lt;input&gt;</code>的<code>ref</code>属性上。<br>结果就是<code>GrandParent</code>的<code>this.inputElement.current</code>等于<code>CustomTextInput</code>的<code>&lt;input&gt;</code>。</p>
+<p>如果可能，我们不推荐暴露DOM节点，但是这的确是一种有用的解决方法。<br>注意，这种方式需要你添加代码到子组件上。如果你无法控制子组件，你可以通过<code>findDOMNode()</code>，但是不推荐这样做。 </p>
+<h2 id="Callback-Refs-Refs回调"><a href="#Callback-Refs-Refs回调" class="headerlink" title="Callback Refs - Refs回调"></a>Callback Refs - Refs回调</h2><p>React支持另一种方式去设置refs，refs回调，这给refs的设置与取消设置提供了更好的控制。</p>
+<p>通过function来代替createRef()，将其传递给<code>ref</code>属性。<br>function接受HTML的DOM节点或者React组件实例作为参数，这样就可以在其他地方存储或者访问他。</p>
+<p>下面的例子实现了一种普通的模式: 使用<code>ref</code>回调去存储DOM节点的引用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">class CustomTextInput extends React.Component &#123;</span><br><span class="line">  constructor(props) &#123;</span><br><span class="line">    super(props);</span><br><span class="line"></span><br><span class="line">    this.textInput = null;</span><br><span class="line"></span><br><span class="line">    this.setTextInputRef = element =&gt; &#123;</span><br><span class="line">      this.textInput = element;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    this.focusTextInput = () =&gt; &#123;</span><br><span class="line">      // Focus the text input using the raw DOM API</span><br><span class="line">      if (this.textInput) this.textInput.focus();</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  componentDidMount() &#123;</span><br><span class="line">    // autofocus the input on mount</span><br><span class="line">    this.focusTextInput();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    // Use the `ref` callback to store a reference to the text input DOM</span><br><span class="line">    // element in an instance field (for example, this.textInput).</span><br><span class="line">    return (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;input</span><br><span class="line">          type=&quot;text&quot;</span><br><span class="line">          ref=&#123;this.setTextInputRef&#125;</span><br><span class="line">        /&gt;</span><br><span class="line">        &lt;input</span><br><span class="line">          type=&quot;button&quot;</span><br><span class="line">          value=&quot;Focus the text input&quot;</span><br><span class="line">          onClick=&#123;this.focusTextInput&#125;</span><br><span class="line">        /&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>React会在组件挂载时调用<code>ref</code>回调，同时当组件卸载的时候，<code>ref</code>会变成null。<br><code>ref</code>回调在<code>componentDidMount</code>或者<code>componentDidUpdate</code>之前调用。</p>
+<p>你可以在组件间传递ref回调，就像上面传递React.createRef()创建的refs对象一样。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">function CustomTextInput(props) &#123;</span><br><span class="line">  return (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;input ref=&#123;props.inputRef&#125; /&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Parent extends React.Component &#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    return (</span><br><span class="line">      &lt;CustomTextInput</span><br><span class="line">        inputRef=&#123;el =&gt; this.inputElement = el&#125;</span><br><span class="line">      /&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在上面的例子中，<code>Parent</code>通过<code>inputRef</code>属性传递<code>ref</code>回调给<code>CustomTextInput</code>，<br>然后<code>CustomTextInput</code>将inputRef赋予<code>&lt;input&gt;</code>的ref属性。<br>这样，<code>Parent</code>的<code>this.inputElement</code>就设置成<code>CustomTextInput</code>中<code>&lt;input&gt;</code>元素的DOM节点了。</p>
+<h2 id="Legacy-API-String-Refs-旧版API：refs字符串"><a href="#Legacy-API-String-Refs-旧版API：refs字符串" class="headerlink" title="Legacy API: String Refs - 旧版API：refs字符串"></a>Legacy API: String Refs - 旧版API：refs字符串</h2><p>如果你之前用过React, 你可能熟悉旧的API中字符串类型的<code>ref</code>属性，像<code>textInput</code>，你可以通过<code>this.refs.textInput</code>访问DOM节点。<br>我们不建议用这种方式，因为它存在很多问题，同时可能在未来的版本中移除。</p>
+<blockquote>
+<p>Note</p>
+<p>如果你要使用<code>this.refs.textInput</code>去访问refs，我们推荐你使用<code>回调模式</code>或者<code>createRef API</code>。</p>
 </blockquote>
-<p>在阅读该章节的时候，对原型原理以及衍生知识点一直似懂非懂。通过对示例代码的分析与总结，让我对类的基础知识有更形象的理解。想着记录下来供我后续阅览，于是有了这篇文章。</p>
-<h2 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h2><p>以下代码来源书本内容，由于自己重新敲了一遍，有些地方会不一致，但是不影响最终展示。</p>
-<h3 id="enumeration类"><a href="#enumeration类" class="headerlink" title="enumeration类"></a>enumeration类</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">/* </span><br><span class="line">  enumeration函数创建了一个新的枚举类，实参对象表示类的每个实例的名字和值</span><br><span class="line">  返回值是一个构造函数，他标示这个新类</span><br><span class="line">*/</span><br><span class="line">function enumeration(namesToValues) &#123;</span><br><span class="line">  // enumeration不能作为构造函数</span><br><span class="line">  const enumeration = function() &#123;</span><br><span class="line">    throw &quot;Can&apos;t Instantiate Enumerations&quot;;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  const proto = enumeration.prototype = &#123;</span><br><span class="line">    toString: function() &#123; return this.name; &#125;,</span><br><span class="line">    valueOf: function() &#123; return this.value; &#125;,</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  enumeration.values = []; // 用于存放枚举对象数组</span><br><span class="line">  for (let name in namesToValues) &#123;</span><br><span class="line">    // for in 会遍历对象的原型链上的所有属性，推荐使用hasOwnProperty过滤</span><br><span class="line">    if (!Object.hasOwnProperty.call(namesToValues, name)) &#123;</span><br><span class="line">      continue;</span><br><span class="line">    &#125;</span><br><span class="line">    const e = inherit(proto);</span><br><span class="line">    e.name = name; // 设置对象name</span><br><span class="line">    e.value = namesToValues[name]; // 设置对象的值</span><br><span class="line">    enumeration[name] = e; // 将对象设置为构造函数的属性</span><br><span class="line">    enumeration.values.push(e);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  // 添加遍历方法</span><br><span class="line">  enumeration.foreach = function(f, c) &#123;</span><br><span class="line">    for (let i = 0; i &lt; this.values.length; i++) &#123;</span><br><span class="line">      f.call(c, this.values[i]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  return enumeration;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 继承函数</span><br><span class="line">function inherit(p) &#123;</span><br><span class="line">  if (p === null) throw TypeError();</span><br><span class="line">  if (Object.create) &#123;</span><br><span class="line">    return Object.create(p);</span><br><span class="line">  &#125;</span><br><span class="line">  const t = typeof p;</span><br><span class="line">  if (t !== &quot;object&quot; &amp;&amp; t !== &quot;function&quot;) &#123;</span><br><span class="line">    throw TypeError();</span><br><span class="line">  &#125;</span><br><span class="line">  function F() &#123;&#125;</span><br><span class="line">  F.prototype = p;</span><br><span class="line">  return new F();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/01/15/Javascript权威指南源码分析-扑克牌类/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+<h2 id="Caveats-with-callback-refs-refs回调注意事项"><a href="#Caveats-with-callback-refs-refs回调注意事项" class="headerlink" title="Caveats with callback refs - refs回调注意事项"></a>Caveats with callback refs - refs回调注意事项</h2><p>如果ref回调函数被定义为内联函数，在更新期间会被调用两次。<br>第一次的参数是null，然后才是DOM元素。<br>这是因为每次重新渲染都会产生一个新的函数实例，所以React会清理旧的，并生成新的ref。<br>你可以通过将他设置为类的绑定方法来避免这种情况，但是在大多数情况下，他不应该存在。</p>
+
       
     </div>
     
@@ -774,182 +464,36 @@
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/08/关于防抖动-Debounce-和节流-Throttle/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="hpcherry">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://cn.gravatar.com/userimage/112842032/73fd3bf04f51d455c72fa51465bcfb08.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Twenty One">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/08/关于防抖动-Debounce-和节流-Throttle/" itemprop="url">关于防抖动(Debounce)和节流(Throttle)</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-08T23:06:26+08:00">
-                2018-01-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Javascript/" itemprop="url" rel="index">
-                    <span itemprop="name">Javascript</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
+            <a href="/tags/Javascript-React/" rel="tag"># -Javascript -React</a>
           
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/01/08/关于防抖动-Debounce-和节流-Throttle/" class="leancloud_visitors" data-flag-title="关于防抖动(Debounce)和节流(Throttle)">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
+      
 
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
+      
       
       
 
       
-        
-          <h2 id="了解背景"><a href="#了解背景" class="headerlink" title="了解背景"></a>了解背景</h2><p>某项目中，需要实现一个及时搜索框，当用户输入关键字即去搜索相关数据。项目框架为React，使用onChange来监听input的输入事件。初步完成之后发现了问题，用户输入一个中文，会多次调用change事件，因每一次拼音的输入都会触发change事件。随即我决定采用延迟调用的方式去处理，沿着这个思路，发现了<a href="https://github.com/niksy/throttle-debounce" target="_blank" rel="noopener">throttle-debounce</a>，同时对debounce有了初步了解。</p>
-<h2 id="什么是Debounce"><a href="#什么是Debounce" class="headerlink" title="什么是Debounce"></a>什么是Debounce</h2><p>百度百科：按键去抖动，机械按键在按下时，并非按下就接触的很好，尤其是有弹簧片的机械开关，会在接触的瞬间反复开合多次。为了消除这种情况，会在断开闭合后执行一个延时程序，5ms～10ms的延时，让前沿抖动消失后再一次检测键的状态，如果仍保持相同状态电平，则确认为真正有键按下。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Creates a debounced function that delays invoking `func` until after `wait`</span><br><span class="line">milliseconds have elapsed since the last time the debounced function was</span><br><span class="line">invoked, or until the next browser frame is drawn.</span><br></pre></td></tr></table></figure>
-<p>以上来源于: <a href="https://github.com/lodash/lodash/blob/master/debounce.js" target="_blank" rel="noopener">lodash/debounce.js</a></p>
-<p>个人理解：当函数调用后，指定时间内没有再次被调用，则执行。若在指定时间内再次调用，则重新计算时间。</p>
-<p>在某些情况下，由于事件被频繁调用(例如：mousemove, keyup)，会造成很多重复性的动作，这些动作可能会造成占用内存，重复调用等资源浪费行为。</p>
-<p>这个时候，debounce的作用就是限制这些事件以一定的频率调用，例如限制搜索框的change事件500ms调用一次，这样我们可以避免多次的服务器请求。</p>
-<h2 id="什么是Throttle"><a href="#什么是Throttle" class="headerlink" title="什么是Throttle"></a>什么是Throttle</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Creates a throttled function that only invokes `func` at most once per </span><br><span class="line">every `wait` milliseconds (or once per browser frame).</span><br></pre></td></tr></table></figure>
-<p>以上来源于: <a href="https://github.com/lodash/lodash/blob/master/throttle.js" target="_blank" rel="noopener">lodash/throttle.js</a></p>
-<p>个人理解： 函数在预定义的执行周期内，最多执行一次</p>
-<p>例如onscroll事件，在一个无限滚动的内容区域内，我们必须检测滚动条距离底部的位置，如果使用debounce则会造成用户滚动底部停止动作了才去请求数据的情况。</p>
-<p>而使用throttle则可以保障我们不断的去检查滚动条的位置，及时获取数据。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/01/08/关于防抖动-Debounce-和节流-Throttle/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/30/关于传送门React-Portal/" rel="next" title="关于传送门React-Portal">
+                <i class="fa fa-chevron-left"></i> 关于传送门React-Portal
+              </a>
+            
           </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
 
-    
+          <span class="post-nav-divider"></span>
 
-    
-
-    
-
-    <footer class="post-footer">
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
       
 
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -959,10 +503,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -970,6 +515,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -990,8 +539,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -1055,6 +613,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#When-to-Use-Refs-什么时候使用Refs"><span class="nav-number">1.</span> <span class="nav-text">When to Use Refs - 什么时候使用Refs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Don’t-Overuse-Refs-不要过度使用Refs"><span class="nav-number">2.</span> <span class="nav-text">Don’t Overuse Refs - 不要过度使用Refs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Creating-Refs-创建Refs"><span class="nav-number">3.</span> <span class="nav-text">Creating Refs - 创建Refs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Accessing-Refs-访问Refs"><span class="nav-number">4.</span> <span class="nav-text">Accessing Refs - 访问Refs</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Adding-a-Ref-to-a-DOM-Element"><span class="nav-number">4.1.</span> <span class="nav-text">Adding a Ref to a DOM Element</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Adding-a-Ref-to-a-Class-Component"><span class="nav-number">4.2.</span> <span class="nav-text">Adding a Ref to a Class Component</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Refs-and-Functional-Components"><span class="nav-number">4.3.</span> <span class="nav-text">Refs and Functional Components</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Exposing-DOM-Refs-to-Parent-Components-将Refs暴露给父组件"><span class="nav-number">5.</span> <span class="nav-text">Exposing DOM Refs to Parent Components - 将Refs暴露给父组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Callback-Refs-Refs回调"><span class="nav-number">6.</span> <span class="nav-text">Callback Refs - Refs回调</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Legacy-API-String-Refs-旧版API：refs字符串"><span class="nav-number">7.</span> <span class="nav-text">Legacy API: String Refs - 旧版API：refs字符串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Caveats-with-callback-refs-refs回调注意事项"><span class="nav-number">8.</span> <span class="nav-text">Caveats with callback refs - refs回调注意事项</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -1213,6 +787,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
 
   
 
