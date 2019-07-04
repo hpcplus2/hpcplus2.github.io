@@ -72,7 +72,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="HTTP,性能优化," />
 
 
 
@@ -83,17 +83,20 @@
 
 
 
-<meta name="description" content="mark something">
-<meta property="og:type" content="website">
-<meta property="og:title" content="分类">
-<meta property="og:url" content="http://yoursite.com/categories/index.html">
+<meta name="description" content="前言很多时候我们碰到页面资源未更新问题，都知道这是缓存造成的，一般情况下我们都是通过清理缓存来解决问题。但是你了解资源哪些情况下会进行缓存，又是什么情况下缓存会过期？此文希望探究一下缓存策略的相关细节，让我们对缓存策略有一个较为全面的了解。 HTTP缓存策略有哪些强制缓存强制缓存根据过期时间决定使用本地缓存还是请求新资源 强制缓存根据HTTP头部中的Cache-Control和Expires来判断">
+<meta name="keywords" content="HTTP,性能优化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTP缓存策略">
+<meta property="og:url" content="http://yoursite.com/2019/07/04/HTTP缓存策略/index.html">
 <meta property="og:site_name" content="Twenty One">
-<meta property="og:description" content="mark something">
+<meta property="og:description" content="前言很多时候我们碰到页面资源未更新问题，都知道这是缓存造成的，一般情况下我们都是通过清理缓存来解决问题。但是你了解资源哪些情况下会进行缓存，又是什么情况下缓存会过期？此文希望探究一下缓存策略的相关细节，让我们对缓存策略有一个较为全面的了解。 HTTP缓存策略有哪些强制缓存强制缓存根据过期时间决定使用本地缓存还是请求新资源 强制缓存根据HTTP头部中的Cache-Control和Expires来判断">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-03T01:50:23.000Z">
+<meta property="og:image" content="https://img-blog.csdn.net/20180207100306608?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjU2NDMwMTE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2019-07-04T15:55:28.162Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="分类">
-<meta name="twitter:description" content="mark something">
+<meta name="twitter:title" content="HTTP缓存策略">
+<meta name="twitter:description" content="前言很多时候我们碰到页面资源未更新问题，都知道这是缓存造成的，一般情况下我们都是通过清理缓存来解决问题。但是你了解资源哪些情况下会进行缓存，又是什么情况下缓存会过期？此文希望探究一下缓存策略的相关细节，让我们对缓存策略有一个较为全面的了解。 HTTP缓存策略有哪些强制缓存强制缓存根据过期时间决定使用本地缓存还是请求新资源 强制缓存根据HTTP头部中的Cache-Control和Expires来判断">
+<meta name="twitter:image" content="https://img-blog.csdn.net/20180207100306608?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjU2NDMwMTE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 
 
 
@@ -123,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/07/04/HTTP缓存策略/"/>
 
 
 
 
 
-  <title>分类 | Twenty One</title>
+  <title>HTTP缓存策略 | Twenty One</title>
   
 
 
@@ -268,40 +271,211 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/04/HTTP缓存策略/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hpcherry">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://cn.gravatar.com/userimage/112842032/73fd3bf04f51d455c72fa51465bcfb08.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Twenty One">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">分类</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body han-init-context">
         
         
-          <div class="category-all-page">
-            <div class="category-all-title">
-                目前共计 2 个分类
-            </div>
-            <div class="category-all">
-              <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/HTTP/">HTTP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a><span class="category-list-count">5</span></li></ul>
-            </div>
-          </div>
+          <h1 class="post-title" itemprop="name headline">HTTP缓存策略</h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-04T22:16:41+08:00">
+                2019-07-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/HTTP/" itemprop="url" rel="index">
+                    <span itemprop="name">HTTP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/07/04/HTTP缓存策略/" class="leancloud_visitors" data-flag-title="HTTP缓存策略">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
       
       
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>很多时候我们碰到页面资源未更新问题，都知道这是缓存造成的，一般情况下我们都是通过清理缓存来解决问题。但是你了解资源哪些情况下会进行缓存，又是什么情况下缓存会过期？此文希望探究一下缓存策略的相关细节，让我们对缓存策略有一个较为全面的了解。</p>
+<h2 id="HTTP缓存策略有哪些"><a href="#HTTP缓存策略有哪些" class="headerlink" title="HTTP缓存策略有哪些"></a>HTTP缓存策略有哪些</h2><h3 id="强制缓存"><a href="#强制缓存" class="headerlink" title="强制缓存"></a>强制缓存</h3><p>强制缓存根据过期时间决定使用本地缓存还是请求新资源</p>
+<p>强制缓存根据HTTP头部中的<code>Cache-Control</code>和<code>Expires</code>来判断</p>
+<h4 id="Cache-Control"><a href="#Cache-Control" class="headerlink" title="Cache-Control"></a>Cache-Control</h4><p><code>Cache-Control</code>可以由多个字段组合而成，这里主要介绍以下几种</p>
+<ul>
+<li><code>no-cache</code> <strong>不是字面意思上的不缓存</strong>，而是要求所有缓存了该资源的用户，在使用缓存资源之前，发送带验证的请求到服务器确认资源是否发生变化</li>
+<li><code>no-store</code> 真正意义上的禁止缓存，每次请求都要向服务器重新获取数据</li>
+<li><code>max-age</code> 指定从请求的时刻开始计算，此次响应的缓存有效的最长时间（单位是秒）</li>
+<li><code>public</code> 表明响应可以被任何对象（发送请求的客户端、cdn等等）缓存</li>
+<li><code>private</code> 表明响应只能被单个用户（可能是操作系统用户、浏览器用户）缓存，是非共享的，不能被代理服务器缓存（cdn等）</li>
+</ul>
+<h4 id="Expires"><a href="#Expires" class="headerlink" title="Expires"></a>Expires</h4><p>指定一个明确的时间点作为缓存资源的过期时间，在此时间点之前客户端将使用本地缓存，而不会向服务器发送请求。<code>Expires</code>有一个很大的缺点，所指定的时间点是服务器时间，但是客户端进行判断的时候，是将其和本地时间作对比，当两者出现误差时，缓存就会失效。</p>
+<p>和此策略类似的就是<code>Cache-Control</code>中的<code>max-age</code>，他指定的是缓存的时间跨度，而非某个时间点，不会受客户端与服务器时间误差的影响。所以，相比于<code>Expires</code>，<code>max-age</code>更精确。同时<strong>在缓存策略里面，<code>max-age</code>的优先级比<code>Expires</code>更高</strong>。</p>
+<h3 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h3><p>缓存的时间到期了，不一定意味着资源内容发生了变化，如果请求的资源和本地的缓存没有区别，实际上不需要再次请求，这时候就需要通过某些机制去判断服务器资源是否发生变更，这就是协商缓存。</p>
+<p>协商缓存是通过HTTP头部的<code>Last-Modified/If-Modified-Since</code>、<code>Etag/If-None-Match</code>字段取判断是否资源发生变更</p>
+<h4 id="Last-Modified-If-Modified-Since"><a href="#Last-Modified-If-Modified-Since" class="headerlink" title="Last-Modified/If-Modified-Since"></a>Last-Modified/If-Modified-Since</h4><p> <code>Last-Modified</code>指服务器端资源的<strong>最后修改时间</strong>，响应头部会带上这个标识。第一次请求之后，浏览器记录这个时间。</p>
+<p> 再次请求时，请求头部带上<code>If-Modified-Since</code>即为之前记录下的时间。服务器端收到带 <code>If-Modified-Since</code>的请求后会去和资源的最后修改时间对比。若修改过就返回最新资源，状态码<code>200</code>，若没有修改过则返回<code>304</code></p>
+<h4 id="Etag-If-None-Match"><a href="#Etag-If-None-Match" class="headerlink" title="Etag/If-None-Match"></a>Etag/If-None-Match</h4><p><code>Etag</code>是服务器为资源分配的一种唯一标识，作为响应头部信息返回给客户端。浏览器在<code>Cache-Control</code>指定了<code>no-cache</code>或者<code>max-age</code>和<code>Expires</code>均过期之后，会将<code>Etag</code>的值通过<code>If-None-Match</code>作为请求头部信息发送给服务器。</p>
+<p>服务器接受到请求之后，通过对比请求头部中的<code>Etag</code>值是否改变，若修改过就返回最新资源，状态码<code>200</code>，若没有修改过则返回<code>304</code></p>
+<h4 id="关于-last-modified-和-Etag-区别"><a href="#关于-last-modified-和-Etag-区别" class="headerlink" title="关于 last-modified 和 Etag 区别"></a>关于 last-modified 和 Etag 区别</h4><ul>
+<li>某些服务器不能精确得到资源的最后修改时间，这样就无法通过最后修改时间判断资源是否更新</li>
+<li><code>Last-modified</code>只能精确到秒</li>
+<li>一些资源的最后修改时间改变了，但是内容没改变，使用<code>Last-modified</code>判断不了内容是否改变</li>
+<li><code>Etag</code>的精度比<code>Last-modified</code>高，属于强验证，要求资源字节级别的一致，优先级高。如果服务器端有提供<code>Etag</code>的话，必须先对<code>Etag</code>进行 <code>Conditional Request</code></li>
+</ul>
+<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><p>计算<code>Etag</code>是需要占用资源的，如果修改不是过于频繁，看自己的需求用 <code>Cache-Control</code>是否可以满足</p>
+<h2 id="HTTP缓存策略流程图"><a href="#HTTP缓存策略流程图" class="headerlink" title="HTTP缓存策略流程图"></a>HTTP缓存策略流程图</h2><p><img src="https://img-blog.csdn.net/20180207100306608?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjU2NDMwMTE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过以上说明，我们对缓存策略的流程有了一个简单的了解。实际应用场景上，我们还需要根据业务需求来决定使用哪种缓存方式。以上！</p>
+<blockquote>
+<p>文章内容参考资料:</p>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Caching_FAQ" target="_blank" rel="noopener">HTTP 缓存控制</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/29750583" target="_blank" rel="noopener">HTTP 缓存机制一二三</a></p>
+</blockquote>
+
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/HTTP/" rel="tag"># HTTP</a>
+          
+            <a href="/tags/性能优化/" rel="tag"># 性能优化</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/17/webpack系列-file-loader和url-loader的区别/" rel="next" title="webpack系列: file-loader和url-loader的区别">
+                <i class="fa fa-chevron-left"></i> webpack系列: file-loader和url-loader的区别
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -334,8 +508,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -399,6 +582,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP缓存策略有哪些"><span class="nav-number">2.</span> <span class="nav-text">HTTP缓存策略有哪些</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#强制缓存"><span class="nav-number">2.1.</span> <span class="nav-text">强制缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Cache-Control"><span class="nav-number">2.1.1.</span> <span class="nav-text">Cache-Control</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Expires"><span class="nav-number">2.1.2.</span> <span class="nav-text">Expires</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#协商缓存"><span class="nav-number">2.2.</span> <span class="nav-text">协商缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Last-Modified-If-Modified-Since"><span class="nav-number">2.2.1.</span> <span class="nav-text">Last-Modified/If-Modified-Since</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Etag-If-None-Match"><span class="nav-number">2.2.2.</span> <span class="nav-text">Etag/If-None-Match</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于-last-modified-和-Etag-区别"><span class="nav-number">2.2.3.</span> <span class="nav-text">关于 last-modified 和 Etag 区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注意"><span class="nav-number">2.2.4.</span> <span class="nav-text">注意</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP缓存策略流程图"><span class="nav-number">3.</span> <span class="nav-text">HTTP缓存策略流程图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
