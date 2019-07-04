@@ -92,7 +92,7 @@
 <meta property="og:description" content="前言很多时候我们碰到页面资源未更新问题，都知道这是缓存造成的，一般情况下我们都是通过清理缓存来解决问题。但是你了解资源哪些情况下会进行缓存，又是什么情况下缓存会过期？此文希望探究一下缓存策略的相关细节，让我们对缓存策略有一个较为全面的了解。 HTTP缓存策略有哪些强制缓存强制缓存根据过期时间决定使用本地缓存还是请求新资源 强制缓存根据HTTP头部中的Cache-Control和Expires来判断">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://raw.githubusercontent.com/hpcplus2/resource/master/HTTP缓存策略.png">
-<meta property="og:updated_time" content="2019-07-04T16:05:07.523Z">
+<meta property="og:updated_time" content="2019-07-04T16:07:14.557Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HTTP缓存策略">
 <meta name="twitter:description" content="前言很多时候我们碰到页面资源未更新问题，都知道这是缓存造成的，一般情况下我们都是通过清理缓存来解决问题。但是你了解资源哪些情况下会进行缓存，又是什么情况下缓存会过期？此文希望探究一下缓存策略的相关细节，让我们对缓存策略有一个较为全面的了解。 HTTP缓存策略有哪些强制缓存强制缓存根据过期时间决定使用本地缓存还是请求新资源 强制缓存根据HTTP头部中的Cache-Control和Expires来判断">
@@ -396,6 +396,7 @@
 </ul>
 <h4 id="Expires"><a href="#Expires" class="headerlink" title="Expires"></a>Expires</h4><p>指定一个明确的时间点作为缓存资源的过期时间，在此时间点之前客户端将使用本地缓存，而不会向服务器发送请求。<code>Expires</code>有一个很大的缺点，所指定的时间点是服务器时间，但是客户端进行判断的时候，是将其和本地时间作对比，当两者出现误差时，缓存就会失效。</p>
 <p>和此策略类似的就是<code>Cache-Control</code>中的<code>max-age</code>，他指定的是缓存的时间跨度，而非某个时间点，不会受客户端与服务器时间误差的影响。所以，相比于<code>Expires</code>，<code>max-age</code>更精确。同时<strong>在缓存策略里面，<code>max-age</code>的优先级比<code>Expires</code>更高</strong>。</p>
+<a id="more"></a>
 <h3 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h3><p>缓存的时间到期了，不一定意味着资源内容发生了变化，如果请求的资源和本地的缓存没有区别，实际上不需要再次请求，这时候就需要通过某些机制去判断服务器资源是否发生变更，这就是协商缓存。</p>
 <p>协商缓存是通过HTTP头部的<code>Last-Modified/If-Modified-Since</code>、<code>Etag/If-None-Match</code>字段取判断是否资源发生变更</p>
 <h4 id="Last-Modified-If-Modified-Since"><a href="#Last-Modified-If-Modified-Since" class="headerlink" title="Last-Modified/If-Modified-Since"></a>Last-Modified/If-Modified-Since</h4><p> <code>Last-Modified</code>指服务器端资源的<strong>最后修改时间</strong>，响应头部会带上这个标识。第一次请求之后，浏览器记录这个时间。</p>
