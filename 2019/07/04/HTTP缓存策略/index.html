@@ -91,12 +91,12 @@
 <meta property="og:site_name" content="Twenty One">
 <meta property="og:description" content="前言很多时候我们碰到页面资源未更新问题，都知道这是缓存造成的，一般情况下我们都是通过清理缓存来解决问题。但是你了解资源哪些情况下会进行缓存，又是什么情况下缓存会过期？此文希望探究一下缓存策略的相关细节，让我们对缓存策略有一个较为全面的了解。 HTTP缓存策略有哪些强制缓存强制缓存根据过期时间决定使用本地缓存还是请求新资源 强制缓存根据HTTP头部中的Cache-Control和Expires来判断">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://img-blog.csdn.net/20180207100306608?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjU2NDMwMTE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2019-07-04T15:55:28.162Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/hpcplus2/resource/master/HTTP缓存策略.png">
+<meta property="og:updated_time" content="2019-07-04T16:05:07.523Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HTTP缓存策略">
 <meta name="twitter:description" content="前言很多时候我们碰到页面资源未更新问题，都知道这是缓存造成的，一般情况下我们都是通过清理缓存来解决问题。但是你了解资源哪些情况下会进行缓存，又是什么情况下缓存会过期？此文希望探究一下缓存策略的相关细节，让我们对缓存策略有一个较为全面的了解。 HTTP缓存策略有哪些强制缓存强制缓存根据过期时间决定使用本地缓存还是请求新资源 强制缓存根据HTTP头部中的Cache-Control和Expires来判断">
-<meta name="twitter:image" content="https://img-blog.csdn.net/20180207100306608?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjU2NDMwMTE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/hpcplus2/resource/master/HTTP缓存策略.png">
 
 
 
@@ -409,7 +409,7 @@
 <li><code>Etag</code>的精度比<code>Last-modified</code>高，属于强验证，要求资源字节级别的一致，优先级高。如果服务器端有提供<code>Etag</code>的话，必须先对<code>Etag</code>进行 <code>Conditional Request</code></li>
 </ul>
 <h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><p>计算<code>Etag</code>是需要占用资源的，如果修改不是过于频繁，看自己的需求用 <code>Cache-Control</code>是否可以满足</p>
-<h2 id="HTTP缓存策略流程图"><a href="#HTTP缓存策略流程图" class="headerlink" title="HTTP缓存策略流程图"></a>HTTP缓存策略流程图</h2><p><img src="https://img-blog.csdn.net/20180207100306608?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjU2NDMwMTE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+<h2 id="HTTP缓存策略流程图"><a href="#HTTP缓存策略流程图" class="headerlink" title="HTTP缓存策略流程图"></a>HTTP缓存策略流程图</h2><p><img src="https://raw.githubusercontent.com/hpcplus2/resource/master/HTTP缓存策略.png" alt=""></p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过以上说明，我们对缓存策略的流程有了一个简单的了解。实际应用场景上，我们还需要根据业务需求来决定使用哪种缓存方式。以上！</p>
 <blockquote>
 <p>文章内容参考资料:</p>
